@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+    <h1>Category index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Title</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                <td>{{ category.Title }}</td>
+                <td>
+                    <a href="{{ path('category_update', {'id': category.id}) }}">Modifier la catégorie</a>
+                    <a href="{{ path('category_delete', {'id': category.id}) }}">Supprimer la catégorie</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('category_create') }}">Create new</a>
+{% endblock %}

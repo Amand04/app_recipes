@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+        {% block body %}
+        {% for recipe in recipes %}
+        <article>
+        <h2>{{ recipe.title }}</h2>
+                <a href={{path('recipe_update', {'id': recipe.id})}}>Modifier la recette</a>
+                <a href={{path('recipe_delete', {'id': recipe.id})}}>Supprimer la recette</a
+        </article>
+        {% endfor %}
+        <div>
+        <a href={{path('recipe_create')}}>Créer une nouvelle recette</a>
+</div>
+        {% endblock %}
+    

@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+{% block title %}Les Recettes
+{% endblock %}
+        {% block body %}
+        	{{ form_start(recipeForm) }}
+
+        {{form_row(recipeForm)}}
+        <button type="submit" class="btn btn-primary btn-lg my-3">Enregistrer</button>
+        	{{ form_end(recipeForm) }}
+
+        {% endblock %}
+ 
