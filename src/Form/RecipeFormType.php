@@ -21,10 +21,8 @@ class RecipeFormType extends AbstractType
             ->add('steps')
             ->add('category', EntityType::class, [
                 'class' => Category::class,
-                'choice_label' => 'title',
+                'choice_label' => 'title']);
                 
-
-                ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

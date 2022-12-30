@@ -27,21 +27,23 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/category/create", name="category_create", methods={"GET", "POST"})
      */
-    public function create(Request $request, CategoryRepository $categoryRepository): Response
+    public function create(Request $request, CategoryRepository $categoryRepository, EntityManagerInterfacE $entityManager): Response
     {
         $category = new Category();
-        $categoryForm = $this->createForm(CategoryFormType::class, $category);
-        $categoryForm->handleRequest($request);
+        $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
-            $categoryRepository->add($category, true);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $category = $form->getData();
+       $entityManager->persist($category);
+       $entityManager->flush();
 
             return $this->redirectToRoute('category_list');
         }
 
         return $this->renderForm('admin/category_create.html.twig', [
             'category' => $category,
-            'categoryForm' => $categoryForm,
+            'form' => $form,
         ]);
     }
 
@@ -52,17 +54,17 @@ class CategoryController extends AbstractController
     {
         $category = $categoryRepository->find($id);
 
-        $categoryForm = $this->createForm(CategoryFormType::class, $category);
-        $categoryForm->handleRequest($request);
+        $form = $this->createForm(CategoryFormType::class, $category);
+        $form->handleRequest($request);
 
-        if ($categoryForm->isSubmitted() && $categoryForm->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $categoryRepository->add($category, true);
 
             return $this->redirectToRoute('category_list', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->render('admin/category_create.html.twig', [
-            'categoryForm' => $categoryForm->createView()
+            'form' => $form->createView()
          ]);
           
     }
@@ -70,7 +72,7 @@ class CategoryController extends AbstractController
     /**
      * @Route("/admin/category/{id}/delete", name="category_delete")
      */
-    public function delete($id, Category $category, CategoryRepository $categoryRepository, EntityManagerInterfacE $entityManager): Response
+    public function delete($id, Category $category, CategoryRepository $categoryRepository, EntityManagerInterface $entityManager): Response
     {
         $category = $categoryRepository->find($id);
       $entityManager->remove($category);

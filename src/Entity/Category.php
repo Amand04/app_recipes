@@ -65,7 +65,7 @@ class Category
         return $this->recipes;
     }
 
-    public function addRecipe(Recipes $recipe): self
+    public function addRecipe(Recipe $recipe): Self
     {
         if (!$this->recipes->contains($recipe)) {
             $this->recipes[] = $recipe;
@@ -75,7 +75,7 @@ class Category
         return $this;
     }
 
-    public function removeRecipe(Recipes $recipe): self
+    public function removeRecipe(Recipe $recipe): self
     {
         if ($this->recipes->removeElement($recipe)) {
             // set the owning side to null (unless already changed)

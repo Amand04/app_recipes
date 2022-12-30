@@ -1,10 +1,15 @@
-{% extends 'base.html.twig' %}
+{% extends 'admin/base.html.twig' %}
 {% block body %}
+<section class="container my-2">
+		<div class="row">
+			<div class="col">
     <h1>Créer une nouvelle catégorie</h1>
 
-  {{ form_start(categoryForm) }}
-    {{ form_widget(categoryForm) }}
+  {{ form_start(form) }}
+    {{ form_widget(form) }}
     <button class="btn">{{ button_label|default('Save') }}</button>
-{{ form_end(categoryForm) }}
-
+{{ form_end(form) }}
+	</div>
+		</div>
+		</section>
 {% endblock %}

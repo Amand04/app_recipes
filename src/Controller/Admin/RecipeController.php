@@ -22,21 +22,24 @@ class RecipeController extends AbstractController
     */
    public function recipeCreate(Request $request, EntityManagerInterface $entityManager)
    {
-      $recipe = new Recipes();
-      $recipeForm = $this->createForm(RecipeFormType::class, $recipe);
+      $recipe = new Recipe();
+      $form = $this->createForm(RecipeFormType::class, $recipe);
 
-      $recipeForm->handleRequest($request);
+      $form->handleRequest($request);
 
-      if ($recipeForm->isSubmitted() && $recipeForm->isValid()) {
-         $recipeRepository->add($recipe, true);
+      if ($form->isSubmitted() && $form->isValid()) {
 
-         return $this->redirectToRoute('recipes_list');
+       $recipe = $form->getData();
+       $entityManager->persist($recipe);
+       $entityManager->flush();
+
+      return $this->redirectToRoute('recipes_list');
       }
 
 
       return $this->renderForm('admin/recipe_create.html.twig', [
          'recipe' => $recipe,
-         'recipeForm' => $recipeForm
+         'form' => $form
       ]);
    }
 
@@ -46,18 +49,22 @@ class RecipeController extends AbstractController
    public function recipeUpdate($id, Request $request, EntityManagerInterface $entityManager, RecipeRepository $recipeRepository)
    {
       $recipe = $recipeRepository->find($id);
-      $recipeForm = $this->createForm(RecipeFormType::class, $recipe);
+      $recipes = $recipeRepository->findAll();
+      $form = $this->createForm(RecipeFormType::class, $recipe);
 
-      $recipeForm->handleRequest($request);
+      $form->handleRequest($request);
 
-      if ($recipeForm->isSubmitted() && $recipeForm->isValid()) {
+      if ($form->isSubmitted() && $form->isValid()) {
          $entityManager->persist($recipe);
          $entityManager->flush();
+
+         return $this->redirectToRoute('recipes_list');
       }
 
 
       return $this->render('admin/recipe_create.html.twig', [
-         'recipeForm' => $recipeForm->createView()
+         'recipes' => $recipes,
+         'form' => $form->createView(),
       ]);
    }
 
