@@ -1,22 +1,36 @@
 {% extends 'admin/base.html.twig' %}
-        {% block body %}
+{% block body %}
 
-{% for recipe in recipes %}
-<div class="card" style="width: 18rem;">
+	<div class="container d-flex flex-wrap justify-content-center">
+		<button type="button" class="btn btn-dark m-2" id="button_create">
+			<a href={{path('recipe_create')}} id="a_href_create">Ajouter une recette</a>
+		</button>
+	</div>
 
-  <img src="public\images\photo.jpg" class="card-img-top" alt="{{ recipe.title }}">
-  <div class="card-body">
-    <h5 class="card-title">{{ recipe.title }}</h5>
-    <p class="card-text">Description de la recette</p>
-    <a href="#" class="btn btn-primary">Voir le détail de la recette</a>
-      <a href={{path('recipe_update', {'id': recipe.id})}}>Modifier la recette</a>
-                <a href={{path('recipe_delete', {'id': recipe.id})}}>Supprimer la recette</a>
-  </div>
-</div>
-        {% endfor %}
-        <div>
-        <button type="button" class="btn btn-dark m-2" id="button_create">
-        <a href={{path('recipe_create')}}>Créer une nouvelle recette</a></button>
-</div>
-        {% endblock %}
-    
+
+	<div class="container d-flex flex-wrap justify-content-center">
+
+		{% for recipe in recipes %}
+			<div class="card" style="width: 46rem;">
+
+				<div class="card-body">
+					<h5 class="card-title">{{ recipe.title }}</h5>
+					<p class="card-text">Description de la recette</p>
+					<img src="../../photo.jpg" class="card-img-top" alt="{{ recipe.title }}">
+
+
+					<div class="container d-flex flex-wrap justify-content-center">
+
+						<a href={{path('recipe_update', {'id': recipe.id} )}}>
+							<i class='far fa-edit fa-2x m-3' id="icons"></i>
+						</a>
+						<a href={{path('recipe_delete', {'id': recipe.id} )}}>
+							<i class='far fa-trash-alt fa-2x m-3' id="icons"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div></div>
+{% endblock %}

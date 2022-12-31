@@ -1,32 +1,34 @@
 {% extends 'admin/base.html.twig' %}
 {% block body %}
-    <h1>Category index</h1>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Title</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for category in categories %}
-            <tr>
-                <td>{{ category.id }}</td>
-                <td>{{ category.Title }}</td>
-                <td>
-                    <a href="{{ path('category_update', {'id': category.id}) }}">Modifier la catégorie</a>
-                    <a href="{{ path('category_delete', {'id': category.id}) }}">Supprimer la catégorie</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">no records found</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+	<div class="container d-flex flex-wrap justify-content-center">
+		<button type="button" class="btn btn-dark m-2" id="button_create">
+			<a href={{path('category_create')}} id="a_href_create">Ajouter une catégorie</a>
+		</button>
+	</div>
 
-    <a href="{{ path('category_create') }}">Create new</a>
+
+	<div class="container d-flex flex-wrap justify-content-center">
+
+		{% for category in categories %}
+			<div class="card" style="width: 46rem;">
+
+				<div class="card-body">
+					<h5 class="card-title">{{ category.id }}</h5>
+					<p class="card-text">{{category.Title}}</p>
+
+					<div class="container d-flex flex-wrap justify-content-center">
+
+						<a href={{path('category_update', {'id': category.id} )}}>
+							<i class='far fa-edit fa-2x m-3' id="icons"></i>
+						</a>
+						<a href={{path('category_delete', {'id': category.id} )}}>
+							<i class='far fa-trash-alt fa-2x m-3' id="icons"></i>
+						</a>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+
 {% endblock %}

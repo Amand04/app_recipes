@@ -1,0 +1,80 @@
+body {
+  background-color: #f4ebeb;
+  font-family: "Inter", sans-serif;
+}
+
+#appli_title {
+  font-family: "Calligraffitti", cursive;
+}
+
+#deconnect_link {
+  font-style: italic;
+  text-decoration: underline;
+}
+
+#button_create {
+  width: 375px;
+  height: 200px;
+  background-color: #85d0ab;
+  color: #070000;
+  border-color: #85d0ab;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+#button_create_register {
+  width: 375px;
+  height: 200px;
+  background-color: #dc9a7d;
+  color: #070000;
+  border-color: #dc9a7d;
+  border-radius: 15px;
+  text-decoration: none;
+}
+
+.card {
+  margin: 15px;
+  border-radius: 15px;
+  width: 40%;
+  height: auto;
+}
+
+.card-img-top {
+  border-radius: 15px;
+}
+#a_href_create {
+  color: rgb(0, 5, 10);
+  text-decoration: none;
+}
+
+#icons {
+  color: #070000;
+}
+
+.disc {
+  position: absolute;
+  margin-top: 555px;
+  margin-left: 55px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 230px;
+  height: 230px;
+  background: #85d0ab;
+  border-radius: 50%;
+}
+
+.disc2 {
+  position: absolute;
+  margin-top: 675px;
+  margin-left: 200px;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 150px;
+  height: 150px;
+  background: #e022b1;
+  border-radius: 50%;
+}
